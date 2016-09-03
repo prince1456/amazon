@@ -1,0 +1,20 @@
+<div id="<%= dom_id(review) %>">
+    <%= review.body %>
+    <%= "rating: #{review.rating} Star\s" %>
+
+    <%# if can? :destroy, review %>
+
+    <!-- delete bottom for delete review -->
+    <%= link_to "delete", product_review_path(@product, review), method: :delete, remote: true, data: {confirm: "are you sure?"} %>
+    <%# end %>
+
+    <% if can? :like, review %>
+
+        <% user_like = review.like_for current_user %>
+        <%= render "/likes/like", {review: review, user_like: user_like} %>
+        <!-- delete bottom for delete review -->
+        </div>
+        <% else %>
+        like
+        <% end %>
+          (<%= pluralize review.likes.count, "Like" %>)

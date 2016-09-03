@@ -1,0 +1,7 @@
+<% if user_like.present? %>
+  <!-- like bottom for review -->
+  <%= link_to image_tag("http://icons.iconarchive.com/icons/iconsmind/outline/48/Unlike-2-icon.png", border: 0), review_like_path(review, user_like), method: :delete, remote: true %>
+<% else %>
+  <!-- Delete bottom for review -->
+  <%= link_to image_tag("http://icons.iconarchive.com/icons/iconsmind/outline/48/Like-2-icon.png", border: 0), review_likes_path(review), method: :post, remote: true, class: "like" %>
+<% end %>

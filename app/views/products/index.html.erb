@@ -1,0 +1,55 @@
+<div class="container">
+<h1>list of my products</h1>
+
+<div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    <th>photo</th>
+  </tr>
+  </thead>
+
+<tbody>
+
+      <% @products.each do |prod| %>
+    <td class="col-md-4"><%= link_to prod.title, product_path(prod) %></td>
+    <td class="col-md-4"><%= prod.description %></td>
+    <td class="col-md-4"><%= prod.price %></td>
+    <% if can? :manage, prod %>
+    <td class="col-md-4"><%= link_to "Edit", edit_product_path(prod.id),{class: "btn btn-info btn-lg"} %></td>
+    <td class="col-md-4"><%= link_to "Delete", product_path(prod.id), class: "btn btn-info btn-lg", method: :delete, data: {confirm: "Are you sure?"} %></td>
+    <% end %> 
+    <td><img src="<%= prod.photo %>"></td>
+
+  </tr>
+<% end %>
+</tbody>
+</table>
+<div class="digg_pagination">
+<%= will_paginate @products, previous_label: h("<"), next_label: h(">") %>
+</div>
+
+</div>
+</br>
+<hr>
+<div>
+  <div class="row">
+    <% @products.each do |prod| %>
+  <div class="col-xs-6 col-md-3">
+    <a href="#" class="thumbnail">
+      <img src="<%= prod.photo%>" alt="...">
+    </a>
+    <span style="color: blue"><h4><%= prod.title.first(25) %></h4>, <b>Price is <%= prod.price %></b></span><br>
+    <span><%= prod.description.first(75) %></span>
+  </div>
+
+
+    <% end %>
+</div>
+</div>
+</div>
